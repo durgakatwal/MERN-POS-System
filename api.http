@@ -1,0 +1,53 @@
+@baseUrl= http://localhost:5000/api
+
+###create customer
+POST {{baseUrl}}/customer
+Content-Type: application/json
+
+{
+ "name": "Ram Basnet",
+  "phone": "9876543210",
+  "address": "123 new road",
+  "city": "Kathmandu",
+  "region": "Bagmati",
+  "country": "Nepal",
+  "postbox": "44600",
+  "email": "ram@example.com",
+  "picture": "example.png",
+  "gid": 1,
+  "company": "RB Corp",
+  "taxid": "123456789",
+  "name_s": "Sita Basnet",
+  "phone_s": "9876543211",
+  "email_s": "sita@example.com",
+  "address_s": "124 New Road",
+  "city_s": "Kathmandu",
+  "region_s": "Bagmati",
+  "country_s": "Nepal",
+  "postbox_s": "44600",
+  "balance": 100.50,
+  "loc": 1,
+  "docid": "DOC123",
+  "custom1": "Custom Info",
+  "discount_c": 10
+}
+
+###get all customers
+GET {{baseUrl}}/customer
+Content-Type: application/json
+
+###get customer by id
+GET {{baseUrl}}/customer/69500c9e5ae6d0bf16b8c53d
+Content-Type: application/json
+
+###update customer by id
+PUT {{baseUrl}}/customer/69500c9e5ae6d0bf16b8c53d
+Content-Type: application/json
+
+{
+    "name":"Ram Basnet Updated"
+}
+
+###delete customer by id
+DELETE {{baseUrl}}/customer/69500c9e5ae6d0bf16b8c53d
+Content-Type: application/json
