@@ -1,35 +1,69 @@
 @baseUrl= http://localhost:5000/api
 
+###create customer group
+POST {{baseUrl}}/customerGroup
+Content-Type: application/json
+
+{
+    "name":"VIP Customer",
+    "discount":10,
+    "description":"VIP Customer",
+    "location":1,
+    "isDeleted":false
+}
+
+###get all customerGroup
+GET {{baseUrl}}/customerGroup
+Content-Type: application/json
+
+###get customerGroup by id
+GET {{baseUrl}}/customerGroup/6950b94cb26e3846216c3359
+Content-Type: application/json
+
+###update customerGroup by id
+PUT {{baseUrl}}/customerGroup/6950b94cb26e3846216c3359
+Content-Type: application/json
+
+{
+    "name":"VIP Customer Updated"
+}
+
+###delete customerGroup by id
+DELETE {{baseUrl}}/customerGroup/6950b94cb26e3846216c3359
+Content-Type: application/json
+
 ###create customer
 POST {{baseUrl}}/customer
 Content-Type: application/json
 
 {
- "name": "Ram Basnet",
-  "phone": "9876543210",
-  "address": "123 new road",
+  "name": "Ram Basnet",
+  "company": "JD Enterprises",
+  "phone": "+9779876543210",
+  "email": "ram.basnet@example.com",
+  "address": "123 Main Street",
   "city": "Kathmandu",
   "region": "Bagmati",
   "country": "Nepal",
   "postbox": "44600",
-  "email": "ram@example.com",
-  "picture": "example.png",
-  "gid": 1,
-  "company": "RB Corp",
+  "shipping": {
+    "name": "Sita Basnet",
+    "phone": "+9779876543211",
+    "address": "124 Main Street",
+    "city": "Lalitpur",
+    "region": "Bagmati",
+    "country": "Nepal",
+    "postbox": "44601"
+  },
+  "customerGroup": "6950b94cb26e3846216c3359",
   "taxid": "123456789",
-  "name_s": "Sita Basnet",
-  "phone_s": "9876543211",
-  "email_s": "sita@example.com",
-  "address_s": "124 New Road",
-  "city_s": "Kathmandu",
-  "region_s": "Bagmati",
-  "country_s": "Nepal",
-  "postbox_s": "44600",
-  "balance": 100.50,
-  "loc": 1,
-  "docid": "DOC123",
-  "custom1": "Custom Info",
-  "discount_c": 10
+  "documentId": "DOC123",
+  "customField": { "note": "VIP customer" },
+  "discount": 10.5,
+  "balance": 200.75,
+  "picture": "example.png",
+  "location": 1,
+  "isDeleted": false
 }
 
 ###get all customers
@@ -37,11 +71,11 @@ GET {{baseUrl}}/customer
 Content-Type: application/json
 
 ###get customer by id
-GET {{baseUrl}}/customer/69500c9e5ae6d0bf16b8c53d
+GET {{baseUrl}}/customer/6950bc5a1f946e639b8d9188
 Content-Type: application/json
 
 ###update customer by id
-PUT {{baseUrl}}/customer/69500c9e5ae6d0bf16b8c53d
+PUT {{baseUrl}}/customer/6950bc5a1f946e639b8d9188
 Content-Type: application/json
 
 {
@@ -49,5 +83,86 @@ Content-Type: application/json
 }
 
 ###delete customer by id
-DELETE {{baseUrl}}/customer/69500c9e5ae6d0bf16b8c53d
+DELETE {{baseUrl}}/customer/6950bc5a1f946e639b8d9188
 Content-Type: application/json
+
+
+
+###create supplier Group
+POST {{baseUrl}}/supplierGroup
+Content-Type: application/json
+
+{
+    "name":"VIP Supplier",
+    "discount":10,
+    "description":"VIP Supplier",
+    "location":1,
+    "isDeleted":false
+} 
+
+###get all supplierGroup
+GET {{baseUrl}}/supplierGroup
+Content-Type: application/json
+
+###get supplierGroup by id
+GET {{baseUrl}}/supplierGroup/6950d2c58794d8998175848f
+Content-Type: application/json
+
+###update supplierGroup
+PUT {{baseUrl}}/supplierGroup/6950d2c58794d8998175848f
+Content-Type: application/json
+
+{
+    "name":"VIP Supplier Updated"
+}
+
+###delete supplierGroup
+DELETE {{baseUrl}}/supplierGroup/6950d2c58794d8998175848f
+Content-Type: application/json
+
+
+###create supplier
+POST {{baseUrl}}/supplier
+Content-Type: application/json
+
+{
+  "name": "supplier1",
+  "company": "ABC Trading",
+  "phone": "+9779812345678",
+  "email": "supplier@example.com",
+  "address": "456 Industrial Area",
+  "city": "Kathmandu",
+  "region": "Bagmati",
+  "country": "Nepal",
+  "postbox": "44600",
+  "supplierGroup": "6950d2c58794d8998175848f",
+  "taxId": "TAX123456",
+  "documentId": "DOC456",
+  "customField": { "note": "Preferred supplier" },
+  "discount": 5,
+  "balance": 1000,
+  "picture": "example.png",
+  "isDeleted": false
+}
+
+###get all suppliers
+GET {{baseUrl}}/supplier
+Content-Type: application/json
+
+###get supplier by id
+GET {{baseUrl}}/supplier/6950d44c8794d89981758496
+Content-Type: application/json
+
+###update supplier by id
+PUT {{baseUrl}}/supplier/6950d44c8794d89981758496
+Content-Type: application/json
+
+{
+    "name":"supplier1 Updated",
+    "phone":"+9779812345678",
+    "email":"supplier@example.com"
+}
+
+###delete supplier by id
+DELETE {{baseUrl}}/supplier/6950d44c8794d89981758496
+Content-Type: application/json  
