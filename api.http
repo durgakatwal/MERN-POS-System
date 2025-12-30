@@ -166,3 +166,176 @@ Content-Type: application/json
 ###delete supplier by id
 DELETE {{baseUrl}}/supplier/6950d44c8794d89981758496
 Content-Type: application/json  
+
+
+###create product category
+POST {{baseUrl}}/productCategory
+Content-Type: application/json
+
+{
+  "title": "Electronics",
+  "extra": "Electronic items"
+}
+
+###get all product categories
+GET {{baseUrl}}/productCategory
+Content-Type: application/json
+
+###get product category by id
+GET {{baseUrl}}/productCategory/6951455144b4455a47df413e
+Content-Type: application/json
+
+###update product category
+PUT {{baseUrl}}/productCategory/6951455144b4455a47df413e
+Content-Type: application/json
+
+{
+    "title":"Electronics Updated",
+    "extra":"Electronic items Updated"
+}
+
+###delete product category
+DELETE {{baseUrl}}/productCategory/6951455144b4455a47df413e
+Content-Type: application/json
+
+
+###create wareHouse
+POST {{baseUrl}}/wareHouse
+Content-Type: application/json
+
+{
+    "title":"WareHouse1",
+    "extra":"WareHouse1",
+    "location":1,
+    "isDeleted":false
+}
+
+###get all wareHouses
+GET {{baseUrl}}/wareHouse
+Content-Type: application/json
+
+###get wareHouse by id
+GET {{baseUrl}}/wareHouse/69520e45fdb59dfe24856b35
+Content-Type: application/json
+
+###update warehouse
+PUT {{baseUrl}}/wareHouse/69520e45fdb59dfe24856b35
+Content-Type: application/json
+
+{
+    "title":"WareHouse1 Updated",
+    "extra":"WareHouse1 Updated",
+    "location":1,
+    "isDeleted":false
+} 
+
+###delete warehouse
+DELETE {{baseUrl}}/wareHouse/69520e45fdb59dfe24856b35
+Content-Type: application/json
+
+###create productVariation
+POST {{baseUrl}}/productVariation
+Content-Type: application/json
+
+{
+    "name":"size"
+} 
+
+###get all productVariation
+GET {{baseUrl}}/productVariation
+Content-Type: application/json
+
+###get productVariationById
+GET {{baseUrl}}/productVariation/69525ed2985343cc9144e1d0
+Content-Type: application/json
+
+###update productVariationById
+PUT {{baseUrl}}/productVariation/69525ed2985343cc9144e1d0
+Content-Type: application/json
+
+{
+    "name":"size Updated"
+}
+
+###delete productVariationById
+DELETE {{baseUrl}}/productVariation/69525ed2985343cc9144e1d0
+Content-Type: application/json  
+
+###create productVariationOption
+POST {{baseUrl}}/productVariationOption
+Content-Type: application/json
+
+{
+    "variation":"69525ed2985343cc9144e1d0",
+    "value":"xl"
+}
+
+###get all productVariationOption
+GET {{baseUrl}}/productVariationOption
+Content-Type: application/json
+
+###get productVariationOptionByVariationId
+GET {{baseUrl}}/productVariationOption/variation/69525ed2985343cc9144e1d0
+Content-Type: application/json
+
+###get productVariationOptionById
+GET {{baseUrl}}/productVariationOption/69535331adf1287b416a5b74
+Content-Type: application/json
+
+###update productVariationOptionById
+PUT {{baseUrl}}/productVariationOption/69535331adf1287b416a5b74
+Content-Type: application/json
+
+{
+    "variation":"69525ed2985343cc9144e1d0",
+    "value":"xl Updated"
+}
+
+###delete productVariationOptionById
+DELETE {{baseUrl}}/productVariationOption/69535331adf1287b416a5b74
+Content-Type: application/json
+
+###create product
+POST {{baseUrl}}/product
+Content-Type: application/json
+
+{
+  "product_name":"product1",
+  "product_code":"shoe145",
+  "product_price":"1200",
+  "fproduct_price":"1500",
+  "qty":"10",
+  "product_category":"6951455144b4455a47df413e",
+  "wareHouse":"69520e45fdb59dfe24856b35",
+  "taxrate":"10",
+  "disrate":"5",
+  "product_image":"shoe145.jpg",
+  "product_description":"shoe145",
+  "alert":"5",
+  "unit":"pair",
+  "expiry":"2025-12-31",
+  "code_type":"EAN13",
+  "variation_id": "69525ed2985343cc9144e1d0",
+  "variation_option_id": "69535331adf1287b416a5b74"
+
+}
+
+###get all products
+GET {{baseUrl}}/product
+Content-Type: application/json
+
+###get product by id
+GET {{baseUrl}}/product/69523617357d85d1bd972a36
+Content-Type: application/json
+
+###update product
+PUT {{baseUrl}}/product/69523617357d85d1bd972a36
+Content-Type: application/json
+
+{
+
+}
+
+###delete product
+DELETE {{baseUrl}}/product/695238a4f1c95d0167539f21
+Content-Type: application/json
