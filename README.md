@@ -35,7 +35,7 @@ This system supports soft delete, role-based management, and secure data validat
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/durgakatwal/MERN-POS-System.git
+git clone [https://github.com/durgakatwal/MERN-POS-System.git](https://github.com/durgakatwal/MERN-POS-System.git)
 cd MERN-POS-System
 Install dependencies:
 
