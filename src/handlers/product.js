@@ -12,10 +12,19 @@ import {
   getProductById,
   updateProduct,
 } from "../services/product.js";
+import { authMiddleware } from "../middlewares/authMiddleware.js";
+import { checkPermission } from "../middlewares/permissionMiddleware.js";
 
 const router = express.Router();
 
-router.post("/", productCreateValidation, validate, createProduct);
+router.post(
+  "/",
+  authMiddleware,
+  checkPermission("product", "create"),
+  productCreateValidation,
+  validate,
+  createProduct
+);
 router.get("/", getAllProducts);
 router.get("/:id", mongoIdParamValidator, validate, getProductById);
 router.put("/:id", productUpdateValidation, validate, updateProduct);

@@ -8,6 +8,9 @@ import wareHouseHandler from "./wareHouse.js";
 import productHandler from "./product.js";
 import productVariationHandler from "./productVariation.js";
 import productVariationOptionHandler from "./productVariationOption.js";
+import roleHandler from "./role.js";
+import employeeHandler from "./employee.js";
+import authHandler from "./auth.js";
 const router = Router();
 
 router.get("/", (req, res) => {
@@ -28,4 +31,9 @@ router.use("/wareHouse", wareHouseHandler);
 router.use("/product", productHandler);
 router.use("/productVariation", productVariationHandler);
 router.use("/productVariationOption", productVariationOptionHandler);
+
+//Employee-role,permission
+router.use("/role", roleHandler);
+router.use("/employee", employeeHandler);
+router.use("/auth", authHandler);
 export default router;

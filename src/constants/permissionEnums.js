@@ -14,3 +14,5 @@ export const PERMISSION_MODULES = [
   "Sales Edit",
   "Stock Edit",
 ];
+
+export const PERMISSION_ACTIONS = ["Create", "Read", "Update", "Delete"];

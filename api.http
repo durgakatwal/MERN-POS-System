@@ -1,5 +1,5 @@
 @baseUrl= http://localhost:5000/api
-
+@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5NTNiOThmN2YzNDgyZGQ3YWE4MDhhYSIsInJvbGUiOiI2OTUzYjdmMTM0ODBmYmUwMjlkNzhlMzciLCJ3YXJlSG91c2UiOiI2OTUyMGU0NWZkYjU5ZGZlMjQ4NTZiMzUiLCJpYXQiOjE3NjcwOTQ4MzAsImV4cCI6MTc2NzE4MTIzMH0.y3zpgeQTKmwsLTHQckteeC787NgEzbVu89jMiIaCIGU
 ###create customer group
 POST {{baseUrl}}/customerGroup
 Content-Type: application/json
@@ -317,25 +317,161 @@ Content-Type: application/json
   "code_type":"EAN13",
   "variation_id": "69525ed2985343cc9144e1d0",
   "variation_option_id": "69535331adf1287b416a5b74"
+}
 
+###create product(permission)
+POST {{baseUrl}}/product
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "product_name":"shoes",
+  "product_code":"shoe145",
+  "product_price":"1200",
+  "fproduct_price":"1500",
+  "qty":"10",
+  "product_category":"6951455144b4455a47df413e",
+  "wareHouse":"69520e45fdb59dfe24856b35",
+  "taxrate":"10",
+  "disrate":"5",
+  "product_image":"shoe145.jpg",
+  "product_description":"shoe145",
+  "alert":"5",
+  "unit":"pair",
+  "expiry":"2025-12-31",
+  "code_type":"EAN13",
+  "variation_id": "69525ed2985343cc9144e1d0",
+  "variation_option_id": "69535331adf1287b416a5b74"
 }
 
 ###get all products
 GET {{baseUrl}}/product
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 ###get product by id
-GET {{baseUrl}}/product/69523617357d85d1bd972a36
+GET {{baseUrl}}/product/695358924e50688bb9b2a7a1
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 ###update product
-PUT {{baseUrl}}/product/69523617357d85d1bd972a36
+PUT {{baseUrl}}/product/695358924e50688bb9b2a7a1
 Content-Type: application/json
 
 {
-
+    "product_name":"product1 Updated"
 }
 
 ###delete product
-DELETE {{baseUrl}}/product/695238a4f1c95d0167539f21
+DELETE {{baseUrl}}/product/695358924e50688bb9b2a7a1
 Content-Type: application/json
+
+### Create Role - Admin
+POST {{baseUrl}}/role
+Content-Type: application/json
+
+{
+  "name": "Admin",
+  "permissions": [
+    {
+      "module": "product",
+      "actions": {
+        "create": true,
+        "read": true,
+        "update": true,
+        "delete": true
+      }
+    },
+    {
+      "module": "customer",
+      "actions": {
+        "create": true,
+        "read": true,
+        "update": true,
+        "delete": true
+      }
+    },
+    {
+      "module": "sale",
+      "actions": {
+        "create": true,
+        "read": true,
+        "update": false,
+        "delete": false
+      }
+    }
+  ]
+}
+
+
+### Get All Roles
+GET {{baseUrl}}/role
+Content-Type: application/json
+
+
+### Get Role By Id
+GET {{baseUrl}}/role/6953b7f13480fbe029d78e37
+Content-Type: application/json
+
+###update role
+PUT {{baseUrl}}/role/6953b7f13480fbe029d78e37
+Content-Type: application/json
+
+{
+    "name":"Admin Updated"
+}
+
+###delete role
+DELETE {{baseUrl}}/role/6953b7f13480fbe029d78e37
+Content-Type: application/json
+
+
+### Create Employee
+POST {{baseUrl}}/employee
+Content-Type: application/json
+
+{
+  "name": "Durga Katwal",
+  "username": "admin",
+  "email":"admin@gmail.com",
+  "password": "admin123",
+  "role": "6953b7f13480fbe029d78e37",
+  "wareHouse": "69520e45fdb59dfe24856b35"
+}
+
+
+### Employee Login
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+  "username": "admin",
+  "password": "admin123"
+}
+
+
+###getAll Employees
+GET {{baseUrl}}/employee
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+
+###getEmployeeById
+GET {{baseUrl}}/employee/6953b98f7f3482dd7aa808aa
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+
+###Update Employee
+PUT {{baseUrl}}/employee/6953b98f7f3482dd7aa808aa
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "name":"Durga Katwal Updated"
+}
+
+###delete employee
+DELETE {{baseUrl}}/employee/6953b98f7f3482dd7aa808aa
+Content-Type: application/json
+Authorization: Bearer {{token}}
