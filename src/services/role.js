@@ -48,15 +48,46 @@ export const getRolesById = async (req, res, next) => {
 
 export const updateRole = async (req, res, next) => {
   try {
-    const role = await Role.findOneAndUpdate({ _id: req.params.id }, req.body, {
-      new: true,
-      runValidators: true,
-    });
-    if (!role) throw ValidationError("Role not found");
+    const { permissions: newPermissions, ...otherFields } = req.body;
+
+    // Find existing role
+    const existingRole = await Role.findById(req.params.id);
+    if (!existingRole || existingRole.isDeleted) {
+      throw new NotFoundError("Role not found");
+    }
+
+    // If permissions are provided, merge them
+    let finalPermissions = existingRole.permissions || [];
+
+    if (newPermissions && Array.isArray(newPermissions)) {
+      // Create a map of existing permissions by module
+      const existingMap = new Map(finalPermissions.map((p) => [p.module, p]));
+
+      // Override or add new permissions
+      newPermissions.forEach((newPerm) => {
+        existingMap.set(newPerm.module, newPerm);
+      });
+
+      // Convert back to array
+      finalPermissions = Array.from(existingMap.values());
+    }
+
+    // Prepare update object
+    const updateData = {
+      ...otherFields,
+      permissions: finalPermissions,
+    };
+
+    const updatedRole = await Role.findByIdAndUpdate(
+      req.params.id,
+      updateData,
+      { new: true, runValidators: true }
+    );
+
     res.json({
       success: true,
       message: "Role updated successfully",
-      data: role,
+      data: updatedRole,
     });
   } catch (error) {
     next(error);

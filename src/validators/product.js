@@ -8,11 +8,6 @@ export const productCreateValidation = [
     .withMessage("Product name is required")
     .isLength({ max: 100 }),
 
-  body("product_code")
-    .trim()
-    .notEmpty()
-    .withMessage("Product code is required"),
-
   body("product_category")
     .notEmpty()
     .withMessage("Product category is required")

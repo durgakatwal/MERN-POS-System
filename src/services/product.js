@@ -1,15 +1,22 @@
 import Product from "../models/product.js";
 import ValidationError from "../errors/validation-error.js";
+import generateProductCode from "./counter.js";
 
 export const createProduct = async (req, res, next) => {
   try {
+    //never trust the product client from client and employee
+    delete req.body.product_code;
     const exists = await Product.findOne({
       product_name: req.body.product_name,
-      product_code: req.body.product_code,
+      wareHouse: req.body.wareHouse,
       isDeleted: false,
     });
     if (exists) throw ValidationError("Product already exists");
-    const product = await Product.create(req.body);
+    const productCode = await generateProductCode();
+    const product = await Product.create({
+      ...req.body,
+      product_code: productCode,
+    });
     res.status(201).json({
       success: true,
       message: "Product created successfully",

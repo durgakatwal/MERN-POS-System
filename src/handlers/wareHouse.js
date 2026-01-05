@@ -19,7 +19,7 @@ const router = express.Router();
 router.post(
   "/",
   authMiddleware,
-  checkPermission("wareHouse", "create"),
+  checkPermission("WareHouse", "create"),
   wareHouseCreateValidation,
   validate,
   createWareHouse
@@ -27,13 +27,13 @@ router.post(
 router.get(
   "/",
   authMiddleware,
-  checkPermission("wareHouse", "read"),
+  checkPermission("WareHouse", "read"),
   getAllWareHouses
 );
 router.get(
   "/:id",
   authMiddleware,
-  checkPermission("wareHouse", "read"),
+  checkPermission("WareHouse", "read"),
   wareHouseByIdValidation,
   validate,
   getWareHouseById
@@ -41,7 +41,7 @@ router.get(
 router.put(
   "/:id",
   authMiddleware,
-  checkPermission("wareHouse", "update"),
+  checkPermission("WareHouse", "update"),
   wareHouseByIdValidation,
   validate,
   updateWareHouse
@@ -49,7 +49,7 @@ router.put(
 router.delete(
   "/:id",
   authMiddleware,
-  checkPermission("wareHouse", "delete"),
+  checkPermission("WareHouse", "delete"),
   wareHouseByIdValidation,
   validate,
   deleteWareHouse

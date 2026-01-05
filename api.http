@@ -1,5 +1,5 @@
 @baseUrl= http://localhost:5000/api
-@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5NTNiOThmN2YzNDgyZGQ3YWE4MDhhYSIsInJvbGUiOiI2OTUzYjdmMTM0ODBmYmUwMjlkNzhlMzciLCJ3YXJlSG91c2UiOiI2OTUyMGU0NWZkYjU5ZGZlMjQ4NTZiMzUiLCJpYXQiOjE3Njc1OTQyMDMsImV4cCI6MTc2NzY4MDYwM30.9S9xuG8aIcT1A2eHIlCpcc_eE2A-QxxSH5ZhQPtzbOw
+@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5NWI5NjgzOWE5YTg2MmNjNjI1YmMxNiIsInJvbGUiOiI2OTViOTRjOTlhOWE4NjJjYzYyNWJiZjMiLCJ3YXJlSG91c2UiOiI2OTUyMGU0NWZkYjU5ZGZlMjQ4NTZiMzUiLCJpYXQiOjE3Njc2MTAwMDIsImV4cCI6MTc2NzY5NjQwMn0.U3SN45cSWQKVsKYoAQKWqLsvLOoA5bT52WQGwEDr5UU
 
 
 @staffToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5NWI1YzJhYzYyNmZhNWUxNzZhODI2OCIsInJvbGUiOiI2OTViNWJiMWM2MjZmYTVlMTc2YTgyNjIiLCJ3YXJlSG91c2UiOiI2OTUyMGU0NWZkYjU5ZGZlMjQ4NTZiMzUiLCJpYXQiOjE3Njc1OTUwNzcsImV4cCI6MTc2NzY4MTQ3N30.n0vBqizapaLnwPMec-VUSh9CLDkR7hNkCCxAleDR5go
@@ -206,9 +206,10 @@ Content-Type: application/json
 ###create wareHouse
 POST {{baseUrl}}/wareHouse
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 {
-    "title":"Biratnagar WareHouse",
+    "title":"Kathmandu WareHouse",
     "extra":"WareHouse1",
     "location":1,
     "isDeleted":false
@@ -217,14 +218,17 @@ Content-Type: application/json
 ###get all wareHouses
 GET {{baseUrl}}/wareHouse
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 ###get wareHouse by id
-GET {{baseUrl}}/wareHouse/69520e45fdb59dfe24856b35
+GET {{baseUrl}}/wareHouse/695b625ea131704dae7365ed
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 ###update warehouse
 PUT {{baseUrl}}/wareHouse/69520e45fdb59dfe24856b35
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 {
     "title":"Biratnagar WareHouse Updated",
@@ -446,9 +450,19 @@ Content-Type: application/json
         "update": false,
         "delete": false
       }
+    },
+    {
+      "module": "warehouse",
+      "actions": {
+        "create": true,
+        "read": true,
+        "update": true,
+        "delete": true
+      }
     }
   ]
 }
+
 
 ### Create Role - Staff
 POST {{baseUrl}}/role
@@ -493,20 +507,32 @@ Content-Type: application/json
 
 
 ### Get Role By Id
-GET {{baseUrl}}/role/6953b7f13480fbe029d78e37
+GET {{baseUrl}}/role/695b8aa6f8cb013c151f5473
 Content-Type: application/json
 
 ###update role
-PUT {{baseUrl}}/role/6953b7f13480fbe029d78e37
+PUT {{baseUrl}}/role/695b94c99a9a862cc625bbf3
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 {
-    "name":"Admin Updated"
+   "permissions": [
+     {
+     "module": "productStock",
+  "actions": {
+    "create": true,
+    "read": true,
+    "update": true,
+    "delete": true
+  }
+}
+]
 }
 
 ###delete role
-DELETE {{baseUrl}}/role/6953b7f13480fbe029d78e37
+DELETE {{baseUrl}}/role/695b8aa6f8cb013c151f5473
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 
 ### Create Employee
@@ -518,7 +544,7 @@ Content-Type: application/json
   "username": "admin",
   "email":"admin@gmail.com",
   "password": "admin123",
-  "role": "6953b7f13480fbe029d78e37",
+  "role": "695b94c99a9a862cc625bbf3",
   "wareHouse": "69520e45fdb59dfe24856b35"
 }
 
@@ -531,7 +557,7 @@ Content-Type: application/json
   "username": "staff",
   "email":"staff@gmail.com",
   "password": "staff123",
-  "role": "695b5bb1c626fa5e176a8262",
+  "role": "695b94c99a9a862cc625bbf3",
   "wareHouse": "69520e45fdb59dfe24856b35"
 }
 
@@ -578,4 +604,42 @@ Authorization: Bearer {{token}}
 DELETE {{baseUrl}}/employee/6953b98f7f3482dd7aa808aa
 Content-Type: application/json
 Authorization: Bearer {{token}}
+
+###create productStock
+POST {{baseUrl}}/productStock
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "product":"6953bbbe4c1c0f700b90dd6d",
+    "wareHouse":"695b625ea131704dae7365ed",
+    "quantity":"20",
+    "alertQuantity":"10"
+}
+
+###get all productStock
+GET {{baseUrl}}/productStock
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+###get productStockById
+GET {{baseUrl}}/productStock/695b99c70b1f01864464c88d
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+###update productStock
+PUT {{baseUrl}}/productStock/695b99c70b1f01864464c88d
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "quantity":"25"
+}
+
+###delete productStock
+DELETE {{baseUrl}}/productStock/695b99c70b1f01864464c88d
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+
 

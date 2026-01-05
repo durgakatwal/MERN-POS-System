@@ -18,6 +18,16 @@ const productStockSchema = new mongoose.Schema(
       required: true,
       min: 0,
     },
+    alertQuantity: {
+      type: Number,
+      default: 10,
+      required: true,
+      min: 10,
+    },
+    isDeleted: {
+      type: Boolean,
+      default: false,
+    },
   },
   {
     timestamps: true,

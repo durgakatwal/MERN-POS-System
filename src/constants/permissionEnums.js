@@ -9,10 +9,8 @@ export const PERMISSION_MODULES = [
   "Assign Project",
   "Customer Profile",
   "Reports",
-  "Delete",
   "POS",
-  "Sales Edit",
-  "Stock Edit",
+  "WareHouse",
 ];
 
 export const PERMISSION_ACTIONS = ["Create", "Read", "Update", "Delete"];

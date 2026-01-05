@@ -6,6 +6,7 @@ import supplierHandler from "./supplier.js";
 import productCategoryHandler from "./productCategory.js";
 import wareHouseHandler from "./wareHouse.js";
 import productHandler from "./product.js";
+import productStockHandler from "./productStock.js";
 import productVariationHandler from "./productVariation.js";
 import productVariationOptionHandler from "./productVariationOption.js";
 import roleHandler from "./role.js";
@@ -29,6 +30,7 @@ router.use("/supplier", supplierHandler);
 router.use("/productCategory", productCategoryHandler);
 router.use("/wareHouse", wareHouseHandler);
 router.use("/product", productHandler);
+router.use("/productStock", productStockHandler);
 router.use("/productVariation", productVariationHandler);
 router.use("/productVariationOption", productVariationOptionHandler);
 

@@ -17,6 +17,9 @@
 
 export const checkPermission = (module, action) => {
   return (req, res, next) => {
+    console.log("  Requested module:", JSON.stringify(module));
+    console.log("  Requested action:", JSON.stringify(action));
+    console.log("  User permissions:", req.user.role.permissions);
     if (!req.user || !req.user.role) {
       return res.status(403).json({
         success: false,
@@ -33,7 +36,9 @@ export const checkPermission = (module, action) => {
       });
     }
 
-    const modulePermission = permissions.find((p) => p.module === module);
+    const modulePermission = permissions.find(
+      (p) => p.module.toLowerCase() === module.toLowerCase()
+    );
 
     if (!modulePermission || modulePermission.actions[action] !== true) {
       return res.status(403).json({
