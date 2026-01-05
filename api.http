@@ -1,8 +1,12 @@
 @baseUrl= http://localhost:5000/api
-@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5NTNiOThmN2YzNDgyZGQ3YWE4MDhhYSIsInJvbGUiOiI2OTUzYjdmMTM0ODBmYmUwMjlkNzhlMzciLCJ3YXJlSG91c2UiOiI2OTUyMGU0NWZkYjU5ZGZlMjQ4NTZiMzUiLCJpYXQiOjE3NjcwOTQ4MzAsImV4cCI6MTc2NzE4MTIzMH0.y3zpgeQTKmwsLTHQckteeC787NgEzbVu89jMiIaCIGU
+@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5NTNiOThmN2YzNDgyZGQ3YWE4MDhhYSIsInJvbGUiOiI2OTUzYjdmMTM0ODBmYmUwMjlkNzhlMzciLCJ3YXJlSG91c2UiOiI2OTUyMGU0NWZkYjU5ZGZlMjQ4NTZiMzUiLCJpYXQiOjE3Njc1OTQyMDMsImV4cCI6MTc2NzY4MDYwM30.9S9xuG8aIcT1A2eHIlCpcc_eE2A-QxxSH5ZhQPtzbOw
+
+
+@staffToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5NWI1YzJhYzYyNmZhNWUxNzZhODI2OCIsInJvbGUiOiI2OTViNWJiMWM2MjZmYTVlMTc2YTgyNjIiLCJ3YXJlSG91c2UiOiI2OTUyMGU0NWZkYjU5ZGZlMjQ4NTZiMzUiLCJpYXQiOjE3Njc1OTUwNzcsImV4cCI6MTc2NzY4MTQ3N30.n0vBqizapaLnwPMec-VUSh9CLDkR7hNkCCxAleDR5go
 ###create customer group
-POST {{baseUrl}}/customerGroup
+POST {{baseUrl}}/customerGroup   //used the staff token to check for permissions denied
 Content-Type: application/json
+Authorization: Bearer {{staffToken}}  
 
 {
     "name":"VIP Customer",
@@ -204,7 +208,7 @@ POST {{baseUrl}}/wareHouse
 Content-Type: application/json
 
 {
-    "title":"WareHouse1",
+    "title":"Biratnagar WareHouse",
     "extra":"WareHouse1",
     "location":1,
     "isDeleted":false
@@ -223,7 +227,7 @@ PUT {{baseUrl}}/wareHouse/69520e45fdb59dfe24856b35
 Content-Type: application/json
 
 {
-    "title":"WareHouse1 Updated",
+    "title":"Biratnagar WareHouse Updated",
     "extra":"WareHouse1 Updated",
     "location":1,
     "isDeleted":false
@@ -267,7 +271,7 @@ Content-Type: application/json
 
 {
     "variation":"69525ed2985343cc9144e1d0",
-    "value":"xl"
+    "value":"l"
 }
 
 ###get all productVariationOption
@@ -283,12 +287,12 @@ GET {{baseUrl}}/productVariationOption/69535331adf1287b416a5b74
 Content-Type: application/json
 
 ###update productVariationOptionById
-PUT {{baseUrl}}/productVariationOption/69535331adf1287b416a5b74
+PUT {{baseUrl}}/productVariationOption/69554af55c38f3c18f49c5b7
 Content-Type: application/json
 
 {
     "variation":"69525ed2985343cc9144e1d0",
-    "value":"xl Updated"
+    "value":"l Updated"
 }
 
 ###delete productVariationOptionById
@@ -319,14 +323,41 @@ Content-Type: application/json
   "variation_option_id": "69535331adf1287b416a5b74"
 }
 
-###create product(permission)
+###create product(permission)-admin can create product
 POST {{baseUrl}}/product
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-  "product_name":"shoes",
-  "product_code":"shoe145",
+  "product_name":"Shirt",
+  "product_code":"shirt145",
+  "product_price":"1200",
+  "fproduct_price":"1500",
+  "qty":"10",
+  "product_category":"6951455144b4455a47df413e",
+  //"wareHouse":"69520e45fdb59dfe24856b35",\
+  "wareHouse":"695b625ea131704dae7365ed",
+  "taxrate":"10",
+  "disrate":"5",
+  "product_image":"shirt145.jpg",
+  "product_description":"shirt145",
+  "alert":"5",
+  "unit":"pair",
+  "expiry":"2025-12-31",
+  "code_type":"EAN13",
+  "variation_id": "69525ed2985343cc9144e1d0",
+  "variation_option_id": "69535331adf1287b416a5b74"
+}
+
+
+###create product(permission)-staff cannot create product
+POST {{baseUrl}}/product
+Content-Type: application/json
+Authorization: Bearer {{staffToken}}
+
+{
+  "product_name":"Shocks",
+  "product_code":"shocks145",
   "product_price":"1200",
   "fproduct_price":"1500",
   "qty":"10",
@@ -334,8 +365,8 @@ Authorization: Bearer {{token}}
   "wareHouse":"69520e45fdb59dfe24856b35",
   "taxrate":"10",
   "disrate":"5",
-  "product_image":"shoe145.jpg",
-  "product_description":"shoe145",
+  "product_image":"shocks145.jpg",
+  "product_description":"shocks145",
   "alert":"5",
   "unit":"pair",
   "expiry":"2025-12-31",
@@ -357,14 +388,30 @@ Authorization: Bearer {{token}}
 ###update product
 PUT {{baseUrl}}/product/695358924e50688bb9b2a7a1
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 {
-    "product_name":"product1 Updated"
+    "product_name":"product1 Up"
 }
 
-###delete product
+###update product(permission)-staff cannot update product
+PUT {{baseUrl}}/product/695358924e50688bb9b2a7a1
+Content-Type: application/json
+Authorization: Bearer {{staffToken}}
+
+{
+    "product_name":"product1 Update"
+}
+
+###delete product(permission)-admin can delete product
 DELETE {{baseUrl}}/product/695358924e50688bb9b2a7a1
 Content-Type: application/json
+Authorization: Bearer {{token}}
+
+###delete product(permission)-staff cannot delete product
+DELETE {{baseUrl}}/product/695358924e50688bb9b2a7a1
+Content-Type: application/json
+Authorization: Bearer {{staffToken}}
 
 ### Create Role - Admin
 POST {{baseUrl}}/role
@@ -403,6 +450,42 @@ Content-Type: application/json
   ]
 }
 
+### Create Role - Staff
+POST {{baseUrl}}/role
+Content-Type: application/json
+
+{
+  "name": "Staff",
+  "permissions": [
+    {
+      "module": "product",
+      "actions": {
+        "create": false,
+        "read": true,
+        "update": false,
+        "delete": false
+      }
+    },
+    {
+      "module": "customer",
+      "actions": {
+        "create": false,
+        "read": true,
+        "update": false,
+        "delete": false
+      }
+    },
+    {
+      "module": "sale",
+      "actions": {
+        "create": false,
+        "read": true,
+        "update": false,
+        "delete": false
+      }
+    }
+  ]
+}
 
 ### Get All Roles
 GET {{baseUrl}}/role
@@ -439,8 +522,20 @@ Content-Type: application/json
   "wareHouse": "69520e45fdb59dfe24856b35"
 }
 
+### Create Staff Employee
+POST {{baseUrl}}/employee
+Content-Type: application/json
 
-### Employee Login
+{
+  "name": "Sita Devi",
+  "username": "staff",
+  "email":"staff@gmail.com",
+  "password": "staff123",
+  "role": "695b5bb1c626fa5e176a8262",
+  "wareHouse": "69520e45fdb59dfe24856b35"
+}
+
+### Employee Login-admin
 POST {{baseUrl}}/auth/login
 Content-Type: application/json
 
@@ -449,6 +544,14 @@ Content-Type: application/json
   "password": "admin123"
 }
 
+### Employee Login-staff
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+  "username": "staff",
+  "password": "staff123"
+}
 
 ###getAll Employees
 GET {{baseUrl}}/employee
@@ -475,3 +578,4 @@ Authorization: Bearer {{token}}
 DELETE {{baseUrl}}/employee/6953b98f7f3482dd7aa808aa
 Content-Type: application/json
 Authorization: Bearer {{token}}
+

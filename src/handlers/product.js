@@ -25,9 +25,35 @@ router.post(
   validate,
   createProduct
 );
-router.get("/", getAllProducts);
-router.get("/:id", mongoIdParamValidator, validate, getProductById);
-router.put("/:id", productUpdateValidation, validate, updateProduct);
-router.delete("/:id", mongoIdParamValidator, validate, deleteProduct);
+router.get(
+  "/",
+  authMiddleware,
+  checkPermission("product", "read"),
+  getAllProducts
+);
+router.get(
+  "/:id",
+  authMiddleware,
+  checkPermission("product", "read"),
+  mongoIdParamValidator,
+  validate,
+  getProductById
+);
+router.put(
+  "/:id",
+  authMiddleware,
+  checkPermission("product", "update"),
+  productUpdateValidation,
+  validate,
+  updateProduct
+);
+router.delete(
+  "/:id",
+  authMiddleware,
+  checkPermission("product", "delete"),
+  mongoIdParamValidator,
+  validate,
+  deleteProduct
+);
 
 export default router;

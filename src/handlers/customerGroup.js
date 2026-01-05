@@ -12,13 +12,48 @@ import {
   customerGroupIdValidator,
   updateCustomerGroupValidator,
 } from "../validators/CustomerGroup.js";
+import { authMiddleware } from "../middlewares/authMiddleware.js";
+import { checkPermission } from "../middlewares/permissionMiddleware.js";
 
 const router = express.Router();
 
-router.post("/", createCustomerGroupValidator, validate, createCustomerGroup);
-router.get("/", getAllCustomersGroups);
-router.get("/:id", customerGroupIdValidator, validate, getCustomerGroupById);
-router.put("/:id", updateCustomerGroupValidator, validate, updateCustomerGroup);
-router.delete("/:id", customerGroupIdValidator, validate, deleteCustomerGroup);
+router.post(
+  "/",
+  authMiddleware,
+  checkPermission("customerGroup", "create"),
+  createCustomerGroupValidator,
+  validate,
+  createCustomerGroup
+);
+router.get(
+  "/",
+  authMiddleware,
+  checkPermission("customerGroup", "read"),
+  getAllCustomersGroups
+);
+router.get(
+  "/:id",
+  authMiddleware,
+  checkPermission("customerGroup", "read"),
+  customerGroupIdValidator,
+  validate,
+  getCustomerGroupById
+);
+router.put(
+  "/:id",
+  authMiddleware,
+  checkPermission("customerGroup", "update"),
+  updateCustomerGroupValidator,
+  validate,
+  updateCustomerGroup
+);
+router.delete(
+  "/:id",
+  authMiddleware,
+  checkPermission("customerGroup", "delete"),
+  customerGroupIdValidator,
+  validate,
+  deleteCustomerGroup
+);
 
 export default router;

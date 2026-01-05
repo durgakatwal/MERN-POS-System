@@ -1,5 +1,8 @@
 import express from "express";
-import { createProductVariationOptionValidator } from "../validators/productVariationOption.js";
+import {
+  createProductVariationOptionValidator,
+  variationOptionByIdValidator,
+} from "../validators/productVariationOption.js";
 import { validate } from "../middlewares/validatorMiddleware.js";
 import {
   createProductVariationOption,
@@ -21,7 +24,12 @@ router.post(
 router.get("/", getAllVariationOptions);
 router.get("/variation/:id", getOptionsByVariationId);
 router.get("/:id", getVariationOptionById);
-router.put("/:id", updateVariationOption);
+router.put(
+  "/:id",
+  variationOptionByIdValidator,
+  validate,
+  updateVariationOption
+);
 router.delete("/:id", deleteVariationOption);
 
 export default router;
